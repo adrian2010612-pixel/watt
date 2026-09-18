@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>WHAT IF — Alternate timelines, real events</title>
+<meta name="description" content="Explore alternate sports, history, technology, future and social scenarios.">
+<style>
+:root{
+ --bg:#061b12;--bg2:#03120c;--card:#0b2a1c;--card2:#103522;--line:#2a5b42;
+ --text:#f5f5ee;--muted:#a8bdb0;--orange:#f5a35c;--orange2:#ffd0a4;
+ --shadow:0 18px 45px rgba(0,0,0,.25);--radius:18px;
+}
+:root.light{--bg:#f5f1e8;--bg2:#ebe4d6;--card:#fff;--card2:#f4eee3;--line:#d7cebd;--text:#153322;--muted:#627268;--orange:#c96a1c;--orange2:#9d4d0f;--shadow:0 14px 35px rgba(40,45,35,.10)}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.55}
+button,input{font:inherit}
+button{cursor:pointer}
+a{color:inherit}
+.wrap{width:min(1160px,calc(100% - 36px));margin:auto}
+.skip{position:absolute;left:-999px;top:0;background:var(--orange);color:#122719;padding:10px 14px;z-index:999}
+.skip:focus{left:0}
+.topbar{position:sticky;top:0;z-index:80;background:rgba(3,18,12,.9);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+.light .topbar{background:rgba(245,241,232,.92)}
+.nav{min-height:70px;display:flex;align-items:center;gap:20px}
+.logo{text-decoration:none;font-weight:900;letter-spacing:.04em;font-size:1.25rem;white-space:nowrap}
+.logo span{color:var(--orange)}
+.navlinks{display:flex;gap:20px}
+.navlinks a{text-decoration:none;color:var(--muted);font-size:.92rem}
+.navlinks a:hover{color:var(--orange)}
+.search{flex:1}
+.search input{width:100%;background:var(--card);border:1px solid var(--line);color:var(--text);padding:11px 16px;border-radius:999px;outline:none}
+.search input:focus{border-color:var(--orange);box-shadow:0 0 0 3px rgba(245,163,92,.13)}
+.actions{display:flex;gap:8px;align-items:center}
+.icon,.menu{width:40px;height:40px;border:1px solid var(--line);background:transparent;color:var(--text);border-radius:50%}
+.menu{display:none;border-radius:10px}
+.primary,.secondary{border-radius:999px;padding:11px 17px;font-weight:800}
+.primary{border:1px solid var(--orange);background:var(--orange);color:#102619}
+.secondary{border:1px solid var(--line);background:transparent;color:var(--text)}
+.primary:hover{filter:brightness(1.05)}
+.secondary:hover{border-color:var(--orange);color:var(--orange)}
+.hero{position:relative;min-height:590px;display:flex;align-items:center;overflow:hidden}
+.hero:before{content:"";position:absolute;inset:0;background:
+linear-gradient(90deg,rgba(3,18,12,.97) 0%,rgba(3,18,12,.78) 38%,rgba(3,18,12,.35) 70%,rgba(3,18,12,.72)),
+linear-gradient(0deg,rgba(3,18,12,.92),transparent 55%),
+url("assets/stadium-hero.png");background-size:cover;background-position:center}
+.light .hero:before{background:linear-gradient(90deg,rgba(245,241,232,.94),rgba(245,241,232,.68) 48%,rgba(245,241,232,.25)),linear-gradient(0deg,rgba(245,241,232,.85),transparent 60%),url("assets/stadium-hero.png");background-size:cover;background-position:center}
+.hero-content{position:relative;z-index:1;padding:92px 0}
+.eyebrow,.tag{color:var(--orange);font-size:.74rem;font-weight:850;letter-spacing:.16em}
+h1{font-size:clamp(2.7rem,6vw,5.4rem);line-height:.98;letter-spacing:-.06em;max-width:760px;margin:13px 0 22px}
+h1 span{color:var(--orange)}
+.hero p{max-width:660px;color:var(--muted);font-size:1.08rem}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin:28px 0}
+.trust{display:flex;gap:18px;flex-wrap:wrap;color:var(--muted);font-size:.85rem}
+.section{padding:64px 0;border-top:1px solid var(--line)}
+.section-head{display:flex;justify-content:space-between;gap:20px;align-items:end;margin-bottom:24px}
+h2{font-size:2rem;line-height:1.1;margin:0}
+.sub{color:var(--muted);margin:7px 0 0}
+.count{color:var(--orange);font-weight:800}
+.filters{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:22px}
+.chip{border:1px solid var(--line);background:transparent;color:var(--muted);border-radius:999px;padding:8px 14px}
+.chip.active{background:var(--orange);border-color:var(--orange);color:#102619;font-weight:850}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:17px}
+.card{border:1px solid var(--line);background:var(--card);border-radius:var(--radius);overflow:hidden;color:var(--text);text-align:left;padding:0;box-shadow:var(--shadow);transition:.22s ease;display:flex;flex-direction:column}
+.card:hover{transform:translateY(-5px);border-color:var(--orange)}
+.thumb{height:180px;background-size:cover;background-position:center;position:relative}
+.thumb:after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(2,18,11,.75),transparent 60%)}
+.thumb span{position:absolute;z-index:1;top:12px;left:12px;background:var(--orange);color:#102619;border-radius:999px;padding:4px 8px;font-size:.65rem;font-weight:900}
+.body{padding:15px 16px 18px;flex:1}
+.badge{display:inline-block;border-radius:999px;padding:4px 8px;font-size:.63rem;font-weight:900;letter-spacing:.08em;margin-bottom:8px}
+.fact{background:#194d34;color:#bcefd0}.plausible{background:#4b3a15;color:#ffd6a8}.possible{background:#4a2b16;color:#ffc19a}.speculative{background:#452334;color:#f0b1ce}
+.card h3{font-size:1.06rem;line-height:1.25;margin:0 0 7px}
+.card p{color:var(--muted);font-size:.85rem;margin:0}
+.meta{margin-top:12px;color:var(--orange);font-size:.72rem;font-weight:800}
+.feature-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:18px}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:27px;position:relative;overflow:hidden}
+.panel:after{content:"";position:absolute;width:240px;height:240px;right:-100px;bottom:-120px;border-radius:50%;background:radial-gradient(circle,rgba(245,163,92,.16),transparent 65%)}
+.panel h3{font-size:1.5rem;margin:8px 0}
+.panel p{color:var(--muted)}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:20px}
+.step{padding:14px;border:1px solid var(--line);border-radius:13px;background:var(--card2)}
+.step strong{color:var(--orange);display:block;margin-bottom:5px}
+.mode-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.mode{min-height:190px;border:1px solid var(--line);border-radius:16px;padding:20px;background-size:cover;background-position:center;position:relative;overflow:hidden}
+.mode:before{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(2,18,11,.94),rgba(2,18,11,.25))}
+.mode>*{position:relative;z-index:1}.mode h3{margin:4px 0}.mode p{color:#c9d4cc;font-size:.86rem}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.72);z-index:200;display:none;align-items:center;justify-content:center;padding:18px}
+.modal.open{display:flex}
+.modal-card{width:min(780px,100%);max-height:90vh;overflow:auto;background:var(--card);border:1px solid var(--line);border-radius:20px;padding:25px;box-shadow:var(--shadow)}
+.modal-image{width:100%;height:250px;object-fit:cover;border-radius:14px;margin-bottom:18px}
+.modal-card h3{font-size:1.8rem;line-height:1.15;margin:8px 0}
+.article-cols{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:20px 0}
+.article-box{border:1px solid var(--line);border-radius:13px;padding:15px;background:var(--card2)}
+.timeline{border-left:2px solid var(--orange);padding-left:18px;list-style:none}
+.timeline li{margin:13px 0;color:var(--muted)}
+.predict{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
+.cookie{position:fixed;left:18px;right:18px;bottom:18px;z-index:150;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 18px;display:flex;justify-content:space-between;gap:15px;align-items:center;box-shadow:var(--shadow)}
+.cookie.hide{display:none}.cookie p{margin:0;color:var(--muted);font-size:.83rem}.cookie-actions{display:flex;gap:8px;flex-wrap:wrap}
+.top{position:fixed;right:18px;bottom:18px;width:42px;height:42px;border-radius:50%;border:1px solid var(--line);background:var(--orange);color:#102619;font-weight:900;z-index:120;display:none}.top.show{display:block}
+.footer{padding:30px 0;background:var(--bg2);border-top:1px solid var(--line);color:var(--muted);font-size:.82rem}
+.footer-row{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.footer a{color:var(--muted);text-decoration:none}.footer a:hover{color:var(--orange)}
+.empty{grid-column:1/-1;text-align:center;padding:45px;color:var(--muted);border:1px dashed var(--line);border-radius:16px}
+@media(max-width:1000px){.grid{grid-template-columns:repeat(2,1fr)}.navlinks{display:none}.menu{display:block}.search{order:5;flex-basis:100%}.nav{flex-wrap:wrap;padding:12px 0}.actions{margin-left:auto}}
+@media(max-width:680px){.wrap{width:min(100% - 24px,1160px)}.hero{min-height:540px}.hero-content{padding:72px 0}.grid,.feature-grid,.article-cols,.mode-grid,.steps{grid-template-columns:1fr}.cookie{left:10px;right:10px;bottom:10px;display:block}.cookie-actions{margin-top:10px}.modal-card{padding:18px}.modal-image{height:190px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="topbar">
+<div class="wrap nav">
+<a class="logo" href="#top">W<span>HAT</span> IF</a>
+<nav class="navlinks" aria-label="Primary">
+<a href="#top">Home</a><a href="#explore">What Ifs</a><a href="#lab">Scenario Lab</a><a href="#discover">Discover</a>
+</nav>
+<div class="search"><label for="search" style="position:absolute;left:-9999px">Search</label><input id="search" type="search" placeholder="Search scenarios and categories..."></div>
+<div class="actions">
+<button class="icon" id="theme" aria-label="Toggle theme">☼</button>
+<button class="menu" id="menu" aria-label="Open menu">☰</button>
+<button class="primary" onclick="scrollToId('explore')">Explore What Ifs</button>
+</div>
+</div>
+</header>
+
+<main id="main">
+<section class="hero" id="top">
+<div class="wrap hero-content">
+<div class="eyebrow">ALTERNATE TIMELINES · REAL EVENTS</div>
+<h1>One moment can <span>change everything.</span></h1>
+<p>Explore the sports, historical, technology, future and social moments that could have happened differently, with immersive imagery, readable timelines and interactive predictions.</p>
+<div class="hero-actions">
+<button class="primary" onclick="scrollToId('explore')">Explore What Ifs →</button>
+<button class="secondary" onclick="openLab()">Create a Scenario</button>
+</div>
+<div class="trust"><span>◈ Real events</span><span>◷ Alternate timelines</span><span>⌁ Educational</span><span>◇ Interactive</span></div>
+</div>
+</section>
+
+<section class="section" id="explore">
+<div class="wrap">
+<div class="section-head"><div><h2>Trending scenarios</h2><p class="sub">Every card opens into a full readable scenario.</p></div><div class="count" id="count"></div></div>
+<div class="filters" id="filters"></div>
+<div class="grid" id="grid"></div>
+</div>
+</section>
+
+<section class="section" id="lab">
+<div class="wrap">
+<div class="section-head"><div><h2>Scenario Lab</h2><p class="sub">Create, test and compare your own alternate timeline.</p></div><button class="primary" onclick="openLab()">Start a scenario</button></div>
+<div class="feature-grid">
+<div class="panel">
+<span class="tag">BUILD YOUR BRANCH</span>
+<h3>Turn one real moment into a new timeline</h3>
+<p>Choose the event, change one key decision, then map the consequences. The goal is not to claim the alternative is true, but to explore how the world might have developed differently.</p>
+<div class="steps"><div class="step"><strong>01 · FACT</strong>Start from a real event.</div><div class="step"><strong>02 · BRANCH</strong>Change one moment.</div><div class="step"><strong>03 · TEST</strong>Ask what follows.</div></div>
+</div>
+<div class="panel">
+<span class="tag">EVIDENCE LABELS</span>
+<h3>Know what you're reading</h3>
+<p><b>FACT</b> is part of the record. <b>PLAUSIBLE</b> is a reasoned alternative. <b>POSSIBLE</b> is less certain. <b>SPECULATIVE</b> is highly uncertain.</p>
+<button class="secondary" onclick="scrollToId('explore')">Browse scenarios</button>
+</div>
+</div>
+</div>
+</section>
+
+<section class="section" id="discover">
+<div class="wrap">
+<div class="section-head"><div><h2>Discover by world</h2><p class="sub">The visual atmosphere changes with the kind of event.</p></div></div>
+<div class="mode-grid">
+<div class="mode" style="background-image:url('assets/stadium-hero.png')"><span class="tag">SPORTS</span><h3>Stadium mode</h3><p>Wide match scenes and arena atmosphere, rather than making one player the entire focus.</p></div>
+<div class="mode" style="background-image:url('assets/tech-hero.png')"><span class="tag">TECHNOLOGY</span><h3>Tech reveal mode</h3><p>AI, machines and futuristic technology imagery for invention-based scenarios.</p></div>
+<div class="mode" style="background-image:url('assets/titanic.png')"><span class="tag">HISTORY</span><h3>History mode</h3><p>Cinematic event imagery helps ground the alternate timeline in its real-world starting point.</p></div>
+</div>
+</div>
+</section>
+
+<section class="section">
+<div class="wrap feature-grid">
+<div class="panel"><span class="tag">TIMELINE MODE</span><h3>Real event → branch point → consequences</h3><p>Open a scenario to see the starting event, the change that creates the alternate world, the timeline that follows and a prediction section.</p><button class="primary" onclick="scrollToId('explore')">Read a scenario →</button></div>
+<div class="panel"><span class="tag">NO FAKE MARKETPLACE</span><h3>Keep WHAT IF focused</h3><p>The unrelated IdeaHub, SkillBridge and computer-store content has been removed. The main experience now stays centered on scenarios, timelines, learning and discovery.</p></div>
+</div>
+</section>
+</main>
+
+<footer class="footer">
+<div class="wrap footer-row">
+<div>© 2026 WHAT IF · Educational prototype</div>
+<div><a href="#privacy">Privacy</a> · <a href="#terms">Terms</a> · <a href="#cookies">Cookie Policy</a></div>
+</div>
+</footer>
+
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+<div class="modal-card" id="modalCard"></div>
+</div>
+
+<div class="cookie" id="cookie">
+<div><strong>Cookies</strong><p>Only necessary cookies are used by this prototype. Optional analytics should require consent in production.</p></div>
+<div class="cookie-actions"><button class="secondary" onclick="hideCookie()">Reject non-essential</button><button class="primary" onclick="hideCookie()">Accept</button></div>
+</div>
+<button class="top" id="topBtn" aria-label="Back to top" onclick="scrollToId('top')">↑</button>
+
+<script>
+const scenarios=[
+{t:"What if Neymar had stayed at Barcelona?",c:"Sports",cert:"Speculative",year:"2017",img:"assets/neymar.png",s:"The famous transfer never happens, and Barcelona's attacking core develops on a different path.",tl:["2017 — Barcelona keep their attacking core together.","2019 — Transfer records develop on a different curve.","2021 — European competition is shaped by a different Barcelona side."]},
+{t:"What if the Titanic had never sunk?",c:"History",cert:"Plausible",year:"1912",img:"assets/titanic.png",s:"A small change at sea prevents the disaster, leaving maritime history on a very different course.",tl:["1912 — Titanic reaches New York safely.","1913 — Safety reforms arrive more slowly.","1914 — White Star Line enters the war era with its flagship intact."]},
+{t:"What if Michael Jordan had been drafted by Portland?",c:"Sports",cert:"Possible",year:"1984",img:"assets/jordan.png",s:"Jordan joins the Trail Blazers and the NBA's power map changes before the Bulls dynasty can form.",tl:["1984 — Portland select Jordan.","Late 1980s — The Western Conference changes shape.","1990s — Chicago builds around a different franchise star."]},
+{t:"What if humans lived on Mars?",c:"Future",cert:"Speculative",year:"2030+",img:"assets/mars.png",s:"A permanent human settlement becomes normal life, creating a new branch of civilization.",tl:["2030s — Permanent research settlements expand.","2040s — Families and private industries arrive.","2050s — Mars develops its own major cities and institutions."]},
+{t:"What if AI became fully autonomous?",c:"Technology",cert:"Speculative",year:"Future",img:"assets/ai.png",s:"AI systems can make complex decisions without constant human intervention, transforming work and society.",tl:["Early stage — Autonomous systems handle narrow tasks.","Expansion — AI manages increasingly complex operations.","Long term — Governments and companies redesign rules around autonomous systems."]},
+{t:"What if self-driving cars became mandatory?",c:"Technology",cert:"Possible",year:"Future",img:"assets/cars.png",s:"Road transport becomes heavily automated, changing city design, commuting and vehicle ownership.",tl:["Early adoption — Automated fleets expand.","Transition — Manual driving becomes restricted in major cities.","Mature stage — Roads and parking are redesigned around autonomous fleets."]},
+{t:"What if virtual reality became indistinguishable from reality?",c:"Future",cert:"Speculative",year:"Future",img:"assets/vr.png",s:"Immersive digital worlds become difficult to distinguish from physical life.",tl:["First breakthrough — Realistic sensory simulation arrives.","Mass adoption — Education, entertainment and work move into virtual spaces.","Mature stage — Society debates where physical life ends and digital life begins."]},
+{t:"What if electric cars had won in 1910?",c:"Technology",cert:"Possible",year:"1910",img:"assets/cars.png",s:"Battery technology advances early enough to make electric transport the dominant path.",tl:["1910 — Charging networks grow before petrol stations.","1930 — Electric transport dominates many cities.","1970 — Energy policy develops around a different transport system."]},
+{t:"What if the transistor arrived a decade earlier?",c:"Technology",cert:"Speculative",year:"1930s",img:"assets/ai.png",s:"Smaller electronics arrive sooner, accelerating the transition from mechanical to digital machines.",tl:["1930s — Solid-state switching matures earlier.","1940s — Computing machines shrink faster.","1950s — Consumer electronics become dramatically more advanced."]},
+{t:"What if Mars had kept its magnetic field?",c:"Future",cert:"Plausible",year:"Deep time",img:"assets/mars.png",s:"A stronger planetary shield changes the long-term possibilities for atmosphere, water and settlement.",tl:["Long term — More atmosphere is retained.","Later era — Surface conditions remain more hospitable.","Human era — Mars settlement begins from a radically different baseline."]},
+{t:"What if the World Cup had never been created?",c:"Sports",cert:"Speculative",year:"1930",img:"assets/stadium-hero.png",s:"International football develops through regional competitions instead of one global tournament.",tl:["1930s — Regional tournaments become dominant.","Mid-century — Continental competitions gain greater prestige.","Modern era — International football has a completely different calendar."]},
+{t:"What if a Formula 1 title was decided differently?",c:"Formula 1",cert:"Possible",year:"Final round",img:"assets/cars.png",s:"A single race, strategy call or regulation change shifts a title and the legacy that follows.",tl:["Final rounds — A decisive moment changes the standings.","Following season — Teams react to the altered champion.","Long term — Careers and team histories are remembered differently."]},
+{t:"What if the internet disappeared for one year?",c:"Future",cert:"Speculative",year:"Modern era",img:"assets/tech-hero.png",s:"A global digital blackout forces governments, schools and businesses to rebuild offline systems.",tl:["Month 1 — Emergency offline systems return.","Month 6 — Businesses redesign communication and payments.","Year 1 — Society has a new balance between digital and physical life."]},
+{t:"What if humans discovered alien life?",c:"Future",cert:"Speculative",year:"Future",img:"assets/mars.png",s:"The discovery of life beyond Earth becomes the defining scientific and cultural event of the era.",tl:["Discovery — Evidence is independently confirmed.","First response — Nations coordinate scientific missions.","Long term — Philosophy, science and space policy change permanently."]},
+{t:"What if social media disappeared?",c:"Society",cert:"Possible",year:"Modern era",img:"assets/tech-hero.png",s:"A world without major social platforms changes how news, culture and friendships spread.",tl:["Day 1 — Creators and businesses lose their main distribution channels.","Month 1 — New communities form around smaller networks.","Year 1 — Media habits settle into a very different pattern."]},
+{t:"What if nobody needed sleep?",c:"Society",cert:"Speculative",year:"Future",img:"assets/vr.png",s:"Humans gain a huge amount of extra waking time, changing school, work, entertainment and city life.",tl:["Year 1 — Schedules expand dramatically.","Year 5 — Education and work hours are redesigned.","Long term — Society has to decide what to do with the extra time."]}
+];
+
+const cats=["All","Sports","History","Technology","Future","Society","Formula 1"];
+let active="All",q="";
+const grid=document.getElementById("grid"), filters=document.getElementById("filters"), count=document.getElementById("count");
+
+function badge(c){return c.toLowerCase().replace(" ","-")}
+function renderFilters(){
+ filters.innerHTML=cats.map(c=>`<button class="chip ${c===active?"active":""}" onclick="setFilter('${c}')">${c}</button>`).join("");
+}
+function render(){
+ const query=q.trim().toLowerCase();
+ const list=scenarios.filter(s=>(active==="All"||s.c===active)&&(!query||[s.t,s.s,s.c,s.cert,s.year].join(" ").toLowerCase().includes(query)));
+ count.textContent=`${list.length} ${list.length===1?"scenario":"scenarios"}`;
+ grid.innerHTML=list.length?list.map((s,i)=>`
+ <button class="card" onclick="openScenario(${scenarios.indexOf(s)})">
+   <div class="thumb" style="background-image:url('${s.img}')"><span>${s.c.toUpperCase()}</span></div>
+   <div class="body"><span class="badge ${badge(s.cert)}">${s.cert.toUpperCase()}</span><h3>${s.t}</h3><p>${s.s}</p><div class="meta">${s.year} · Read scenario →</div></div>
+ </button>`).join(""):`<div class="empty">No scenarios match that search. Try another word or category.</div>`;
+}
+function setFilter(c){active=c;renderFilters();render();scrollToId("explore")}
+function scrollToId(id){document.getElementById(id)?.scrollIntoView({behavior:"smooth"})}
+
+function openScenario(i){
+ const s=scenarios[i];
+ document.getElementById("modalCard").innerHTML=`
+ <img class="modal-image" src="${s.img}" alt="">
+ <span class="badge ${badge(s.cert)}">${s.cert.toUpperCase()}</span>
+ <h3 id="modalTitle">${s.t}</h3>
+ <p class="sub">${s.c} · ${s.year}</p>
+ <div class="article-cols">
+  <div class="article-box"><span class="tag">REAL EVENT</span><p>The starting point is grounded in a real event, established record or real-world trend. The alternate outcome is not part of that record.</p></div>
+  <div class="article-box"><span class="tag">THE CHANGE</span><p>One important decision, event or invention changes. The timeline then explores possible consequences.</p></div>
+ </div>
+ <h4>Alternative timeline</h4>
+ <ul class="timeline">${s.tl.map(x=>`<li>${x}</li>`).join("")}</ul>
+ <h4>Your prediction</h4>
+ <div class="predict"><button class="secondary" onclick="choose(this)">Most likely</button><button class="secondary" onclick="choose(this)">Unexpected</button><button class="secondary" onclick="choose(this)">Wild card</button></div>
+ <p class="sub"><em>${s.cert} scenario. Hypothetical outcomes are not guaranteed facts.</em></p>
+ <button class="secondary" onclick="closeModal()">Close</button>`;
+ document.getElementById("modal").classList.add("open");
+ document.body.style.overflow="hidden";
+}
+function choose(btn){document.querySelectorAll(".predict button").forEach(b=>b.disabled=true);btn.textContent+=" ✓"}
+function closeModal(){document.getElementById("modal").classList.remove("open");document.body.style.overflow=""}
+document.getElementById("modal").addEventListener("click",e=>{if(e.target.id==="modal")closeModal()});
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeModal()});
+
+document.getElementById("search").addEventListener("input",e=>{q=e.target.value;render()});
+document.getElementById("theme").addEventListener("click",()=>{
+ document.documentElement.classList.toggle("light");
+ document.getElementById("theme").textContent=document.documentElement.classList.contains("light")?"☾":"☼";
+});
+document.getElementById("menu").addEventListener("click",()=>{
+ const n=document.querySelector(".navlinks");
+ n.style.display=n.style.display==="flex"?"none":"flex";
+ n.style.position="absolute";n.style.top="70px";n.style.left="0";n.style.right="0";n.style.padding="18px";
+ n.style.background="var(--bg2)";n.style.flexDirection="column";
+});
+function openLab(){
+ document.getElementById("modalCard").innerHTML=`<h3 id="modalTitle">Scenario Lab</h3><p class="sub">Prototype builder</p>
+ <div class="article-box"><label class="tag" for="idea">YOUR WHAT IF</label><input id="idea" style="width:100%;margin-top:8px;padding:12px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--text)" placeholder="What if ..."></div>
+ <div class="article-box" style="margin-top:12px"><span class="tag">NEXT STEP</span><p>In the production version, this builder would save the scenario, generate its timeline structure and let you publish it after review.</p></div>
+ <button class="primary" style="margin-top:14px" onclick="this.textContent='Scenario draft created'">Create draft</button>
+ <button class="secondary" style="margin:14px 0 0 8px" onclick="closeModal()">Close</button>`;
+ document.getElementById("modal").classList.add("open");document.body.style.overflow="hidden";
+}
+function hideCookie(){document.getElementById("cookie").classList.add("hide");localStorage.setItem("whatif-cookie","1")}
+if(localStorage.getItem("whatif-cookie"))hideCookie();
+window.addEventListener("scroll",()=>document.getElementById("topBtn").classList.toggle("show",scrollY>500));
+renderFilters();render();
+</script>
+</body>
+</html>
